@@ -38,11 +38,12 @@
       position: relative;
     }
 
-    /* Background pakai ::before — trick agar fixed bekerja di iOS Safari */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
+    /* Background div — absolute bukan fixed, JS yang urus ukurannya */
+    #bg {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      min-height: 100%;
       z-index: -1;
       background-image:
         linear-gradient(135deg,
@@ -53,9 +54,6 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      /* Trick iOS: transform memaksa GPU rendering */
-      transform: translateZ(0);
-      -webkit-transform: translateZ(0);
     }
 
     /* ── Card ── */
@@ -254,7 +252,7 @@
   </style>
 </head>
 <body>
-
+  <div id="bg"></div>
   <div class="card">
     <!-- LEFT -->
     <div class="panel-left">
@@ -315,6 +313,14 @@
   </div>
 
   <script>
+    // Background height fix untuk mobile
+    function fixBg() {
+      const bg = document.getElementById('bg');
+      bg.style.height = document.documentElement.scrollHeight + 'px';
+    }
+    fixBg();
+    window.addEventListener('resize', fixBg);
+
     function previewLogo(event) {
       const file = event.target.files[0];
       if (!file) return;
