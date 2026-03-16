@@ -3,269 +3,350 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hubungi Kami</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <title>PT. Agros Global Indonesia – Konsultasi Gratis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --cream: #f5f0e8;
-      --ink: #1a1a2e;
-      --gold: #c9a84c;
-      --gold-light: #e8d5a3;
-      --rust: #8b3a2a;
-      --muted: #7a7060;
-      --border: #d4c9b0;
+      --green-main: #1a6b2f;
+      --green-light: #2d9e4f;
+      --green-bright: #3dcc66;
+      --green-panel: #0d3d1a;
+      --green-mid: #145c26;
+      --white: #ffffff;
+      --off-white: #f4f8f5;
+      --text-muted: rgba(255,255,255,0.6);
+      --input-bg: rgba(255,255,255,0.95);
+      --radius: 28px;
+      --radius-sm: 16px;
+      --radius-pill: 999px;
     }
 
     body {
       min-height: 100vh;
-      background-color: var(--cream);
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Poppins', sans-serif;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow-x: hidden;
-      padding: 40px 20px;
-      background-image: 
-        radial-gradient(ellipse at 20% 50%, rgba(201,168,76,0.08) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 20%, rgba(139,58,42,0.06) 0%, transparent 50%);
-    }
-
-    .page-wrapper {
-      width: 100%;
-      max-width: 960px;
-      display: grid;
-      grid-template-columns: 1fr 1.4fr;
-      min-height: 580px;
-      box-shadow: 0 30px 80px rgba(26,26,46,0.15), 0 2px 8px rgba(26,26,46,0.08);
-      border-radius: 2px;
+      padding: 24px 16px;
+      position: relative;
       overflow: hidden;
-      animation: fadeUp 0.8s ease both;
     }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to   { opacity: 1; transform: translateY(0); }
+    /* ── Full-page background image ── */
+    .bg-layer {
+      position: fixed;
+      inset: 0;
+      background:
+        url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1600&q=80')
+        center/cover no-repeat;
+      z-index: 0;
+    }
+    .bg-layer::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg,
+        rgba(10,50,18,0.72) 0%,
+        rgba(20,80,35,0.55) 50%,
+        rgba(8,35,15,0.78) 100%);
     }
 
-    /* Left panel */
+    /* ── Card wrapper ── */
+    .card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 980px;
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow:
+        0 40px 100px rgba(0,0,0,0.45),
+        0 0 0 1px rgba(255,255,255,0.08);
+      animation: riseUp 0.7s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    @keyframes riseUp {
+      from { opacity: 0; transform: translateY(40px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0)   scale(1); }
+    }
+
+    /* ── LEFT panel ── */
     .panel-left {
-      background: var(--ink);
-      padding: 60px 44px;
+      background: transparent;
+      padding: 52px 44px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       position: relative;
       overflow: hidden;
+      min-height: 560px;
     }
 
+    /* Decorative diagonal solar-panel lines */
     .panel-left::before {
       content: '';
       position: absolute;
-      width: 300px; height: 300px;
-      border-radius: 50%;
-      border: 60px solid rgba(201,168,76,0.07);
-      top: -80px; left: -80px;
+      bottom: -30px;
+      right: -40px;
+      width: 280px;
+      height: 280px;
+      background: repeating-linear-gradient(
+        -45deg,
+        rgba(255,255,255,0.06) 0px,
+        rgba(255,255,255,0.06) 2px,
+        transparent 2px,
+        transparent 28px
+      );
+      border-radius: 12px;
+      transform: rotate(-10deg);
     }
-
     .panel-left::after {
       content: '';
       position: absolute;
-      width: 200px; height: 200px;
+      top: 40px;
+      right: 20px;
+      width: 160px;
+      height: 160px;
       border-radius: 50%;
-      border: 40px solid rgba(201,168,76,0.05);
-      bottom: 40px; right: -60px;
+      background: radial-gradient(circle, rgba(100,220,120,0.18) 0%, transparent 70%);
     }
 
-    .brand-tag {
-      font-size: 10px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 500;
+    /* Logo */
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
+    .logo-img {
+      height: 44px;
+      width: auto;
+      max-width: 160px;
+      object-fit: contain;
+      display: block;
+    }
+    /* Placeholder shown when no real logo src is set */
+    .logo-placeholder {
+      height: 44px;
+      width: 140px;
+      background: rgba(255,255,255,0.12);
+      border: 2px dashed rgba(255,255,255,0.35);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      color: rgba(255,255,255,0.6);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .logo-placeholder:hover {
+      background: rgba(255,255,255,0.18);
+      border-color: rgba(255,255,255,0.6);
+    }
+    .logo-placeholder .upload-icon {
+      font-size: 16px;
+      opacity: 0.8;
+    }
+    #logoFileInput { display: none; }
 
-    .panel-headline {
+    /* Headline */
+    .left-headline {
       flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 20px;
-      padding: 40px 0;
+      gap: 16px;
+      padding: 32px 0;
     }
-
-    .panel-headline h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(32px, 3.5vw, 42px);
-      color: var(--cream);
-      line-height: 1.2;
+    .left-headline h1 {
+      font-size: clamp(26px, 3vw, 34px);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.18;
+      letter-spacing: -0.5px;
     }
-
-    .panel-headline h1 em {
-      color: var(--gold);
-      font-style: normal;
-    }
-
-    .panel-headline p {
+    .left-headline p {
       font-size: 14px;
-      line-height: 1.8;
-      color: rgba(245,240,232,0.55);
-      font-weight: 300;
-      max-width: 260px;
+      line-height: 1.75;
+      color: var(--text-muted);
+      font-weight: 400;
+      max-width: 270px;
     }
 
-    .divider-line {
-      width: 40px;
-      height: 2px;
-      background: var(--gold);
+    /* CTA button on left */
+    .left-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--white);
+      color: var(--green-main);
+      padding: 14px 24px;
+      border-radius: var(--radius-pill);
+      font-size: 14px;
+      font-weight: 700;
+      width: fit-content;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      margin-top: 8px;
     }
+    .left-cta:hover {
+      transform: translateX(4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+    .left-cta .arrow {
+      font-size: 16px;
+      transition: transform 0.2s;
+    }
+    .left-cta:hover .arrow { transform: translateX(3px); }
 
-    .contact-info {
+    /* Hashtags */
+    .hashtags {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 2px;
+    }
+    .hashtags span {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      font-weight: 500;
     }
 
-    .contact-info-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 13px;
-      color: rgba(245,240,232,0.5);
-    }
-
-    .contact-info-item .icon {
-      width: 28px; height: 28px;
-      border: 1px solid rgba(201,168,76,0.3);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 11px;
-      color: var(--gold);
-      flex-shrink: 0;
-    }
-
-    /* Right panel */
+    /* ── RIGHT panel ── */
     .panel-right {
-      background: #fff;
-      padding: 60px 52px;
+      background: var(--green-panel);
+      padding: 52px 48px;
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
 
-    .form-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 22px;
-      color: var(--ink);
+    .form-heading {
+      font-size: clamp(22px, 2.5vw, 28px);
+      font-weight: 800;
+      color: var(--white);
+      text-align: center;
+      line-height: 1.2;
       margin-bottom: 6px;
     }
-
-    .form-subtitle {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 36px;
+    .form-sub {
+      font-size: 14px;
+      color: var(--text-muted);
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .form-sub strong {
+      color: var(--white);
+      font-weight: 700;
     }
 
-    .form-group {
-      margin-bottom: 22px;
-      position: relative;
-      animation: fadeUp 0.6s ease both;
+    /* Fields */
+    .field {
+      margin-bottom: 16px;
+      animation: slideIn 0.5s ease both;
     }
+    .field:nth-child(1) { animation-delay: 0.05s; }
+    .field:nth-child(2) { animation-delay: 0.1s; }
+    .field:nth-child(3) { animation-delay: 0.15s; }
+    .field:nth-child(4) { animation-delay: 0.2s; }
 
-    .form-group:nth-child(1) { animation-delay: 0.1s; }
-    .form-group:nth-child(2) { animation-delay: 0.2s; }
-    .form-group:nth-child(3) { animation-delay: 0.3s; }
-    .form-group:nth-child(4) { animation-delay: 0.4s; }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
 
     label {
       display: block;
       font-size: 11px;
-      letter-spacing: 1.5px;
+      letter-spacing: 1.8px;
       text-transform: uppercase;
-      color: var(--muted);
+      color: rgba(255,255,255,0.55);
+      font-weight: 600;
       margin-bottom: 8px;
-      font-weight: 500;
     }
 
     input, textarea {
       width: 100%;
-      padding: 12px 16px;
-      border: 1px solid var(--border);
-      border-radius: 1px;
-      font-family: 'DM Sans', sans-serif;
+      background: var(--input-bg);
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: 14px 22px;
+      font-family: 'Poppins', sans-serif;
       font-size: 14px;
-      color: var(--ink);
-      background: var(--cream);
+      color: #1a3322;
       outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      transition: box-shadow 0.2s, transform 0.15s;
     }
-
+    input::placeholder, textarea::placeholder {
+      color: #a0b8a8;
+    }
     input:focus, textarea:focus {
-      border-color: var(--gold);
-      box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
-      background: #fff;
+      box-shadow: 0 0 0 3px rgba(61,204,102,0.45);
+      transform: translateY(-1px);
     }
 
     textarea {
+      border-radius: 20px;
+      min-height: 100px;
       resize: vertical;
-      min-height: 90px;
     }
 
-    .btn-submit {
+    /* Submit button */
+    .btn-kirim {
       width: 100%;
-      padding: 15px;
-      background: var(--ink);
-      color: var(--cream);
+      padding: 16px;
+      background: var(--green-bright);
+      color: var(--green-panel);
       border: none;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
+      border-radius: var(--radius-pill);
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
       cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      transition: background 0.3s;
       margin-top: 8px;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 6px 24px rgba(61,204,102,0.35);
     }
-
-    .btn-submit::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: var(--gold);
-      transform: translateX(-100%);
-      transition: transform 0.35s ease;
-      z-index: 0;
+    .btn-kirim:hover {
+      background: #4fe07a;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(61,204,102,0.5);
     }
+    .btn-kirim:active { transform: translateY(0); }
+    .btn-kirim:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
-    .btn-submit:hover::after { transform: translateX(0); }
-    .btn-submit span { position: relative; z-index: 1; }
-
-    .btn-submit:hover { color: var(--ink); }
-    .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
-
-    /* Success message */
+    /* Success */
     .success-msg {
       display: none;
       text-align: center;
-      padding: 20px;
-      background: rgba(201,168,76,0.1);
-      border: 1px solid var(--gold-light);
-      border-radius: 1px;
       margin-top: 16px;
+      padding: 16px;
+      background: rgba(61,204,102,0.15);
+      border: 1px solid rgba(61,204,102,0.4);
+      border-radius: var(--radius-sm);
+      color: var(--white);
+      font-size: 14px;
+      animation: riseUp 0.4s ease;
     }
+    .success-msg.show { display: block; }
+    .success-msg strong { color: var(--green-bright); }
 
-    .success-msg.show { display: block; animation: fadeUp 0.4s ease; }
-    .success-msg p { font-size: 14px; color: var(--ink); }
-    .success-msg strong { color: var(--gold); }
-
-    /* Loading spinner */
+    /* Spinner */
     .spinner {
       display: inline-block;
       width: 14px; height: 14px;
-      border: 2px solid rgba(245,240,232,0.3);
-      border-top-color: var(--cream);
+      border: 2px solid rgba(13,61,26,0.3);
+      border-top-color: var(--green-panel);
       border-radius: 50%;
       animation: spin 0.7s linear infinite;
       vertical-align: middle;
@@ -273,126 +354,146 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
+    /* ── Responsive ── */
     @media (max-width: 680px) {
-      .page-wrapper { grid-template-columns: 1fr; }
-      .panel-left { padding: 44px 32px; }
-      .panel-right { padding: 44px 32px; }
+      .card { grid-template-columns: 1fr; }
+      .panel-left { min-height: auto; padding: 40px 32px; }
+      .panel-right { padding: 40px 32px; }
     }
   </style>
 </head>
 <body>
 
-<div class="page-wrapper">
-  <!-- LEFT -->
-  <div class="panel-left">
-    <span class="brand-tag">PT. Nama Perusahaan</span>
-    <div class="panel-headline">
-      <div class="divider-line"></div>
-      <h1>Kami siap<br/>mendengar <em>Anda</em></h1>
-      <p>Kirimkan informasi kontak Anda dan tim kami akan segera menghubungi kembali dalam 1×24 jam.</p>
-    </div>
-    <div class="contact-info">
-      <div class="contact-info-item">
-        <div class="icon">✉</div>
-        <span>info@perusahaan.co.id</span>
-      </div>
-      <div class="contact-info-item">
-        <div class="icon">☎</div>
-        <span>+62 21 1234 5678</span>
-      </div>
-      <div class="contact-info-item">
-        <div class="icon">⌖</div>
-        <span>Jakarta, Indonesia</span>
-      </div>
-    </div>
-  </div>
+  <!-- Full-page background -->
+  <div class="bg-layer"></div>
 
-  <!-- RIGHT -->
-  <div class="panel-right">
-    <h2 class="form-title">Formulir Kontak</h2>
-    <p class="form-subtitle">Isi data di bawah ini dan kami akan segera menghubungi Anda.</p>
+  <div class="card">
 
-    <div id="contactForm">
-      <div class="form-group">
+    <!-- LEFT -->
+    <div class="panel-left">
+      <div class="logo-row">
+        <!-- Ganti src="" dengan path logo Anda, atau klik placeholder untuk upload -->
+        <img id="logoImg" class="logo-img" src="" alt="Logo Agros" style="display:none;" />
+        <div class="logo-placeholder" id="logoPlaceholder" onclick="document.getElementById('logoFileInput').click()" title="Klik untuk upload logo">
+          <span class="upload-icon">🖼</span>
+          <span>Logo di sini</span>
+        </div>
+        <input type="file" id="logoFileInput" accept="image/*" onchange="previewLogo(event)" />
+      </div>
+
+      <div class="left-headline">
+        <h1>Selamat Datang,<br/>di PT. Agros Global<br/>Indonesia</h1>
+        <p>Perusahaan Pompa Irigasi Tenaga Surya yang melayani Pembelian ke Seluruh Indonesia</p>
+        <a class="left-cta" href="#">
+          Silahkan Isi Data Bapak/Ibu
+          <span class="arrow">→</span>
+        </a>
+      </div>
+
+      <div class="hashtags">
+        <span>#PompaSemangatMu</span>
+        <span>#NolBahanBakar</span>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="panel-right">
+      <h2 class="form-heading">Konsultasi Gratis<br/>Sekarang!</h2>
+      <p class="form-sub">Klik "<strong>KIRIM</strong>" dan Kami Akan Segera Menghubungi Anda</p>
+
+      <div class="field">
         <label for="nama">Nama Lengkap</label>
         <input type="text" id="nama" placeholder="Masukkan nama lengkap Anda" />
       </div>
-      <div class="form-group">
+      <div class="field">
         <label for="telepon">Nomor Telepon</label>
         <input type="tel" id="telepon" placeholder="+62 812 3456 7890" />
       </div>
-      <div class="form-group">
-        <label for="alamat">Alamat</label>
-        <input type="text" id="alamat" placeholder="Jl. Contoh No. 1, Kota" />
+      <div class="field">
+        <label for="kota">Asal Kota/Kabupaten</label>
+        <input type="text" id="kota" placeholder="Contoh: Yogyakarta, DIY" />
       </div>
-      <div class="form-group">
-        <label for="pesan">Pesan (Opsional)</label>
-        <textarea id="pesan" placeholder="Tuliskan pesan atau kebutuhan Anda..."></textarea>
+      <div class="field">
+        <label for="pesan">Catatan/Pertanyaan</label>
+        <textarea id="pesan" placeholder="Tuliskan pertanyaan atau kebutuhan Anda..."></textarea>
       </div>
 
-      <button class="btn-submit" id="submitBtn" onclick="submitForm()">
-        <span id="btnText">Kirim Data</span>
+      <button class="btn-kirim" id="submitBtn" onclick="submitForm()">
+        <span id="btnText">Kirim</span>
       </button>
 
       <div class="success-msg" id="successMsg">
-        <p>✔ <strong>Data berhasil dikirim!</strong><br/>Terima kasih, kami akan segera menghubungi Anda.</p>
+        ✔ <strong>Data berhasil dikirim!</strong><br/>
+        Terima kasih, kami akan segera menghubungi Anda.
       </div>
     </div>
+
   </div>
-</div>
 
-<script>
-  // ============================================================
-  // GANTI URL INI dengan URL dari deployment Google Apps Script
-  // ============================================================
-  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzpjgZIesbsQ6NbLFKKA220cWWAnVuLNk76fPAg-wVPI1viYS0ss3kkdifVoekTRqAOnA/exec";
-
-  async function submitForm() {
-    const nama    = document.getElementById('nama').value.trim();
-    const telepon = document.getElementById('telepon').value.trim();
-    const alamat  = document.getElementById('alamat').value.trim();
-    const pesan   = document.getElementById('pesan').value.trim();
-
-    if (!nama || !telepon || !alamat) {
-      alert("⚠ Mohon isi Nama, Nomor Telepon, dan Alamat terlebih dahulu.");
-      return;
+  <script>
+    function previewLogo(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = document.getElementById('logoImg');
+        img.src = e.target.result;
+        img.style.display = 'block';
+        document.getElementById('logoPlaceholder').style.display = 'none';
+      };
+      reader.readAsDataURL(file);
     }
 
-    const btn     = document.getElementById('submitBtn');
-    const btnText = document.getElementById('btnText');
+    // ============================================================
+    // GANTI URL INI dengan URL deployment Google Apps Script Anda
+    // ============================================================
+    const APPS_SCRIPT_URL = "";
 
-    btn.disabled = true;
-    btnText.innerHTML = `<span class="spinner"></span> Mengirim...`;
+    async function submitForm() {
+      const nama    = document.getElementById('nama').value.trim();
+      const telepon = document.getElementById('telepon').value.trim();
+      const kota    = document.getElementById('kota').value.trim();
+      const pesan   = document.getElementById('pesan').value.trim();
 
-    const formData = new FormData();
-    formData.append('nama',    nama);
-    formData.append('telepon', telepon);
-    formData.append('alamat',  alamat);
-    formData.append('pesan',   pesan);
+      if (!nama || !telepon || !kota) {
+        alert("⚠ Mohon isi Nama, Nomor Telepon, dan Asal Kota terlebih dahulu.");
+        return;
+      }
 
-    try {
-      await fetch(APPS_SCRIPT_URL, { method: 'POST', body: formData });
+      if (!APPS_SCRIPT_URL) {
+        // Demo mode: no URL set yet
+        showSuccess();
+        return;
+      }
 
-      btnText.innerHTML = "Kirim Data";
-      btn.disabled = false;
+      const btn     = document.getElementById('submitBtn');
+      const btnText = document.getElementById('btnText');
+      btn.disabled  = true;
+      btnText.innerHTML = `<span class="spinner"></span> Mengirim...`;
 
-      document.getElementById('nama').value    = '';
-      document.getElementById('telepon').value = '';
-      document.getElementById('alamat').value  = '';
-      document.getElementById('pesan').value   = '';
+      const formData = new FormData();
+      formData.append('nama',    nama);
+      formData.append('telepon', telepon);
+      formData.append('kota',    kota);
+      formData.append('pesan',   pesan);
 
+      try {
+        await fetch(APPS_SCRIPT_URL, { method: 'POST', body: formData });
+        showSuccess();
+      } catch (err) {
+        alert("Terjadi kesalahan. Pastikan URL Apps Script sudah benar.");
+      } finally {
+        btnText.innerHTML = "Kirim";
+        btn.disabled = false;
+      }
+    }
+
+    function showSuccess() {
+      ['nama','telepon','kota','pesan'].forEach(id => document.getElementById(id).value = '');
       const msg = document.getElementById('successMsg');
       msg.classList.add('show');
       setTimeout(() => msg.classList.remove('show'), 5000);
-
-    } catch (err) {
-      btnText.innerHTML = "Kirim Data";
-      btn.disabled = false;
-      alert("Terjadi kesalahan. Pastikan URL Apps Script sudah benar.");
     }
-  }
-</script>
-
+  </script>
 </body>
-
 </html>
