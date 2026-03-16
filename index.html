@@ -39,7 +39,7 @@
       position: fixed;
       inset: 0;
       background:
-        url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1600&q=80')
+        url('assets/images/bg-hero.jpg')
         center/cover no-repeat;
       z-index: 0;
     }
@@ -76,7 +76,8 @@
 
     /* ── LEFT panel ── */
     .panel-left {
-      background: transparent;
+      background: url('assets/images/bg-left.jpg') center/cover no-repeat;
+      background-blend-mode: overlay;
       padding: 52px 44px;
       display: flex;
       flex-direction: column;
@@ -373,7 +374,7 @@
     <div class="panel-left">
       <div class="logo-row">
         <!-- Ganti src="" dengan path logo Anda, atau klik placeholder untuk upload -->
-        <img id="logoImg" class="logo-img" src="" alt="Logo Agros" style="display:none;" />
+        <img id="logoImg" class="logo-img" src="assets/images/logo-agros.png" alt="Logo Agros" />
         <div class="logo-placeholder" id="logoPlaceholder" onclick="document.getElementById('logoFileInput').click()" title="Klik untuk upload logo">
           <span class="upload-icon">🖼</span>
           <span>Logo di sini</span>
