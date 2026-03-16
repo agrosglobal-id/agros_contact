@@ -21,7 +21,7 @@
       --radius-pill: 999px;
     }
 
-    /* Scroll fix — satu deklarasi, bersih */
+    /* Scroll fix */
     html {
       overflow-x: hidden;
       overflow-y: scroll;
@@ -35,8 +35,15 @@
       justify-content: center;
       padding: 24px 16px;
       overflow-x: hidden;
+      position: relative;
+    }
 
-      /* Background di body langsung — tidak pakai fixed div */
+    /* Background pakai ::before — trick agar fixed bekerja di iOS Safari */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
       background-image:
         linear-gradient(135deg,
           rgba(10,50,18,0.72) 0%,
@@ -45,8 +52,10 @@
         url('./assets/images/bg-hero.jpg');
       background-size: cover;
       background-position: center;
-      background-attachment: scroll;
       background-repeat: no-repeat;
+      /* Trick iOS: transform memaksa GPU rendering */
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
     }
 
     /* ── Card ── */
