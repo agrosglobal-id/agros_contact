@@ -415,14 +415,47 @@
 
     const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwXq5RtOu5YyVYn2ioH99bLYtz8bAiUGfnJaabNgxxPnmN61OMlkhS9gwuMEWJ2WR86hA/exec";
 
-    async function submitForm() {
-      const nama    = document.getElementById('nama').value.trim();
-      const telepon = document.getElementById('telepon').value.trim();
-      const kota    = document.getElementById('kota').value.trim();
-      const pesan   = document.getElementById('pesan').value.trim();
+    // ── Cleaning nomor telepon ──
+    function cleanPhone(raw) {
+      if (!raw || raw.trim() === "") return "";
 
-      // Validasi — berhenti jika ada field kosong
-      if (!validateForm(nama, telepon, kota, pesan)) return;
+      // Hapus karakter +, spasi, dan strip/tanda hubung
+      let bersih = raw.replace(/\+/g, "").replace(/\s/g, "").replace(/-/g, "");
+
+      // 62xxx → 0xxx
+      if (bersih.startsWith("62")) bersih = "0" + bersih.slice(2);
+
+      // 8xxx → 08xxx
+      if (bersih.startsWith("8")) bersih = "0" + bersih;
+
+      const panjang = bersih.length;
+
+      if (panjang < 9)  return "TIDAK VALID: " + bersih;
+      if (panjang > 13) return "CEK: " + bersih;
+
+      // Format: 0812-3456-7890
+      return bersih.slice(0, 4) + "-" + bersih.slice(4, 8) + "-" + bersih.slice(8);
+    }
+
+    async function submitForm() {
+      const nama       = document.getElementById('nama').value.trim();
+      const teleponRaw = document.getElementById('telepon').value.trim();
+      const telepon    = cleanPhone(teleponRaw);
+      const kota       = document.getElementById('kota').value.trim();
+      const pesan      = document.getElementById('pesan').value.trim();
+
+      // Validasi field kosong
+      if (!validateForm(nama, teleponRaw, kota, pesan)) return;
+
+      // Validasi hasil cleaning nomor telepon
+      if (telepon.startsWith("TIDAK VALID") || telepon.startsWith("CEK")) {
+        const el  = document.getElementById('telepon');
+        const err = document.getElementById('err-telepon');
+        el.classList.add('error');
+        err.textContent = "⚠ Nomor tidak valid (" + telepon + ") — mohon periksa kembali.";
+        err.classList.add('show');
+        return;
+      }
 
       const btn     = document.getElementById('submitBtn');
       const btnText = document.getElementById('btnText');
@@ -431,8 +464,8 @@
 
       const formData = new FormData();
       formData.append('nama',    nama);
-      formData.append('telepon', telepon);
-      formData.append('alamat',  kota);   // key 'alamat' sesuai Apps Script
+      formData.append('telepon', telepon);  // sudah bersih & terformat
+      formData.append('alamat',  kota);     // key 'alamat' sesuai Apps Script
       formData.append('pesan',   pesan);
 
       try {
