@@ -19,9 +19,9 @@
       --radius: 28px;
       --radius-sm: 16px;
       --radius-pill: 999px;
+      --error: #ff6b6b;
     }
 
-    /* Scroll fix */
     html {
       overflow-x: hidden;
       overflow-y: scroll;
@@ -38,7 +38,6 @@
       position: relative;
     }
 
-    /* Background div — absolute bukan fixed, JS yang urus ukurannya */
     #bg {
       position: absolute;
       top: 0; left: 0;
@@ -107,7 +106,6 @@
       background: radial-gradient(circle, rgba(100,220,120,0.18) 0%, transparent 70%);
     }
 
-    /* Logo */
     .logo-row { display: flex; align-items: center; gap: 10px; }
     .logo-img {
       height: 100px;
@@ -129,7 +127,6 @@
     }
     #logoFileInput { display: none; }
 
-    /* Headline */
     .left-headline {
       flex: 1;
       display: flex; flex-direction: column;
@@ -150,7 +147,6 @@
       max-width: 270px;
     }
 
-    /* CTA */
     .left-cta {
       display: inline-flex; align-items: center; gap: 10px;
       background: var(--white); color: var(--green-main);
@@ -164,7 +160,6 @@
     .left-cta .arrow { font-size: 16px; transition: transform 0.2s; }
     .left-cta:hover .arrow { transform: translateX(3px); }
 
-    /* Hashtags */
     .hashtags { display: flex; flex-direction: column; gap: 2px; }
     .hashtags span { font-size: 12px; color: rgba(255,255,255,0.4); font-weight: 500; }
 
@@ -185,26 +180,61 @@
     }
     .form-sub strong { color: var(--white); font-weight: 700; }
 
+    /* ── Field & Validation ── */
     .field { margin-bottom: 16px; }
 
     label {
-      display: block; font-size: 11px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
       letter-spacing: 1.8px; text-transform: uppercase;
       color: rgba(255,255,255,0.55); font-weight: 600; margin-bottom: 8px;
     }
+    /* Tanda bintang wajib */
+    label .req {
+      color: var(--error);
+      font-size: 13px;
+      line-height: 1;
+    }
+
+    .input-wrap { position: relative; }
 
     input, textarea {
-      width: 100%; background: var(--input-bg); border: none;
+      width: 100%; background: var(--input-bg); border: 2px solid transparent;
       border-radius: var(--radius-pill);
       padding: 14px 22px;
       font-family: 'Poppins', sans-serif; font-size: 14px; color: #1a3322;
-      outline: none; transition: box-shadow 0.2s, transform 0.15s;
+      outline: none; transition: box-shadow 0.2s, transform 0.15s, border-color 0.2s;
     }
     input::placeholder, textarea::placeholder { color: #a0b8a8; }
     input:focus, textarea:focus {
       box-shadow: 0 0 0 3px rgba(61,204,102,0.45);
       transform: translateY(-1px);
     }
+
+    /* State error */
+    input.error, textarea.error {
+      border-color: var(--error);
+      box-shadow: 0 0 0 3px rgba(255,107,107,0.25);
+      animation: shake 0.35s ease;
+    }
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      20%      { transform: translateX(-6px); }
+      60%      { transform: translateX(6px); }
+    }
+
+    .error-msg {
+      display: none;
+      font-size: 11px;
+      color: var(--error);
+      margin-top: 6px;
+      padding-left: 4px;
+      font-weight: 500;
+    }
+    .error-msg.show { display: block; }
+
     textarea { border-radius: 20px; min-height: 100px; resize: vertical; }
 
     .btn-kirim {
@@ -241,7 +271,6 @@
       body { padding: 10px; overflow-x: hidden; }
       .card { grid-template-columns: 1fr; border-radius: 20px; max-width: 100%; margin: 0; overflow: hidden; width: 100%; }
       .panel-left { min-height: auto; padding: 32px 24px; overflow: hidden; width: 100%; }
-
       .panel-right { padding: 32px 24px; }
       .logo-img { height: 60px; max-width: 180px; }
       .left-headline h1 { font-size: 20px; }
@@ -286,20 +315,35 @@
       <p class="form-sub">Klik "<strong>KIRIM</strong>" dan Kami Akan Segera Menghubungi Anda</p>
 
       <div class="field">
-        <label for="nama">Nama Lengkap</label>
-        <input type="text" id="nama" placeholder="Masukkan nama lengkap Anda" />
+        <label for="nama">Nama Lengkap <span class="req">*</span></label>
+        <div class="input-wrap">
+          <input type="text" id="nama" placeholder="Masukkan nama lengkap Anda" />
+        </div>
+        <div class="error-msg" id="err-nama">⚠ Nama lengkap wajib diisi.</div>
       </div>
+
       <div class="field">
-        <label for="telepon">Nomor Telepon</label>
-        <input type="tel" id="telepon" placeholder="+62 812 3456 7890" />
+        <label for="telepon">Nomor Telepon <span class="req">*</span></label>
+        <div class="input-wrap">
+          <input type="tel" id="telepon" placeholder="+62 812 3456 7890" />
+        </div>
+        <div class="error-msg" id="err-telepon">⚠ Nomor telepon wajib diisi.</div>
       </div>
+
       <div class="field">
-        <label for="kota">Asal Kota/Kabupaten</label>
-        <input type="text" id="kota" placeholder="Contoh: Yogyakarta, DIY" />
+        <label for="kota">Asal Kota/Kabupaten <span class="req">*</span></label>
+        <div class="input-wrap">
+          <input type="text" id="kota" placeholder="Contoh: Yogyakarta, DIY" />
+        </div>
+        <div class="error-msg" id="err-kota">⚠ Asal kota wajib diisi.</div>
       </div>
+
       <div class="field">
-        <label for="pesan">Catatan/Pertanyaan</label>
-        <textarea id="pesan" placeholder="Tuliskan pertanyaan atau kebutuhan Anda..."></textarea>
+        <label for="pesan">Catatan/Pertanyaan <span class="req">*</span></label>
+        <div class="input-wrap">
+          <textarea id="pesan" placeholder="Tuliskan pertanyaan atau kebutuhan Anda..."></textarea>
+        </div>
+        <div class="error-msg" id="err-pesan">⚠ Pertanyaan/catatan wajib diisi.</div>
       </div>
 
       <button class="btn-kirim" id="submitBtn" onclick="submitForm()">
@@ -335,6 +379,40 @@
       reader.readAsDataURL(file);
     }
 
+    // Hapus error state saat user mulai mengetik
+    ['nama', 'telepon', 'kota', 'pesan'].forEach(id => {
+      document.getElementById(id).addEventListener('input', function () {
+        this.classList.remove('error');
+        document.getElementById('err-' + id).classList.remove('show');
+      });
+    });
+
+    function validateForm(nama, telepon, kota, pesan) {
+      let valid = true;
+
+      const fields = [
+        { value: nama,    id: 'nama',    errId: 'err-nama' },
+        { value: telepon, id: 'telepon', errId: 'err-telepon' },
+        { value: kota,    id: 'kota',    errId: 'err-kota' },
+        { value: pesan,   id: 'pesan',   errId: 'err-pesan' },
+      ];
+
+      fields.forEach(f => {
+        const el  = document.getElementById(f.id);
+        const err = document.getElementById(f.errId);
+        if (!f.value) {
+          el.classList.add('error');
+          err.classList.add('show');
+          valid = false;
+        } else {
+          el.classList.remove('error');
+          err.classList.remove('show');
+        }
+      });
+
+      return valid;
+    }
+
     const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwXq5RtOu5YyVYn2ioH99bLYtz8bAiUGfnJaabNgxxPnmN61OMlkhS9gwuMEWJ2WR86hA/exec";
 
     async function submitForm() {
@@ -343,10 +421,8 @@
       const kota    = document.getElementById('kota').value.trim();
       const pesan   = document.getElementById('pesan').value.trim();
 
-      if (!nama || !telepon || !kota) {
-        alert("⚠ Mohon isi Nama, Nomor Telepon, dan Asal Kota terlebih dahulu.");
-        return;
-      }
+      // Validasi — berhenti jika ada field kosong
+      if (!validateForm(nama, telepon, kota, pesan)) return;
 
       const btn     = document.getElementById('submitBtn');
       const btnText = document.getElementById('btnText');
@@ -356,14 +432,14 @@
       const formData = new FormData();
       formData.append('nama',    nama);
       formData.append('telepon', telepon);
-      formData.append('alamat',    kota);
+      formData.append('alamat',  kota);   // key 'alamat' sesuai Apps Script
       formData.append('pesan',   pesan);
 
       try {
         await fetch(APPS_SCRIPT_URL, { method: 'POST', body: formData });
         showSuccess();
       } catch (err) {
-        alert("Terjadi kesalahan. Pastikan URL Apps Script sudah benar.");
+        alert("Terjadi kesalahan. Pastikan koneksi internet Anda aktif.");
       } finally {
         btnText.innerHTML = "Kirim";
         btn.disabled = false;
