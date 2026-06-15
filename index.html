@@ -77,12 +77,12 @@
       display: inline-flex;
       align-items: center;
       background: var(--badge-bg);
-      padding: 10px 22px;
+      padding: 8px 21px;
       border-radius: var(--radius-pill);
       margin-bottom: 28px;
     }
     .hero-badge .badge-icon {
-      height: 26px;
+      height: 21px;
       display: flex; align-items: center;
     }
     .hero-badge .badge-icon img {
@@ -169,9 +169,9 @@
 
     .logo-row { display: flex; align-items: center; gap: 10px; }
     .logo-img {
-      height: 100px;
+      height: 60px;
       width: auto;
-      max-width: 280px;
+      max-width: 170px;
       object-fit: contain;
       display: block;
     }
@@ -377,6 +377,7 @@
 
       .hero-section { padding: 36px 24px; }
       .hero-badge { margin-bottom: 20px; }
+      .hero-badge .badge-icon { height: 15px; }
       .hero-title { font-size: 22px; }
       .hero-sub { font-size: 13px; margin-bottom: 24px; }
       .hero-cta { font-size: 13px; padding: 12px 24px; }
@@ -384,7 +385,7 @@
       .card { grid-template-columns: 1fr; }
       .panel-left { min-height: auto; padding: 32px 24px; overflow: hidden; width: 100%; }
       .panel-right { padding: 32px 24px; }
-      .logo-img { height: 60px; max-width: 180px; }
+      .logo-img { height: 40px; max-width: 115px; }
       .left-headline h1 { font-size: 20px; }
       .left-headline p  { font-size: 13px; }
       .left-cta         { font-size: 13px; padding: 12px 20px; }
@@ -452,7 +453,7 @@
     </div>
 
     <!-- RIGHT -->
-    <div class="panel-right">
+    <div class="panel-right" id="formSection">
       <h2 class="form-heading">Konsultasi Gratis<br/>Sekarang!</h2>
       <p class="form-sub">Klik "<strong>KIRIM</strong>" dan Kami Akan Segera Menghubungi Anda</p>
 
@@ -556,13 +557,14 @@
       reader.readAsDataURL(file);
     }
 
-    // Scroll halus ke form ketika tombol "Konsultasikan Sekarang" diklik
+    // Scroll halus ke section form ketika tombol "Konsultasikan Sekarang" diklik
     function scrollToForm(event) {
       event.preventDefault();
-      const target = document.getElementById('nama');
-      if (!target) return;
-      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      setTimeout(() => target.focus(), 400);
+      const section = document.getElementById('formSection');
+      const target  = document.getElementById('nama');
+      if (!section) return;
+      section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (target) setTimeout(() => target.focus(), 400);
     }
 
     // Hapus error state saat user mulai mengetik
