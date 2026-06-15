@@ -20,6 +20,10 @@
       --radius-sm: 16px;
       --radius-pill: 999px;
       --error: #ff6b6b;
+
+      /* Warna baru untuk layout upgrade */
+      --bg-page: #84da6d;
+      --badge-bg: #67c250;
     }
 
     html {
@@ -31,28 +35,101 @@
       min-height: 100vh;
       font-family: 'Poppins', sans-serif;
       display: flex;
-      align-items: flex-start;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
       padding: 24px 16px;
       overflow-x: hidden;
       position: relative;
+      background-color: var(--bg-page);
     }
 
-    #bg {
-      position: absolute;
-      top: 0; left: 0;
+    /* ════════════════════════════════════════
+       HERO / HEADER SECTION (BARU)
+       Ganti './assets/images/bg-header.png' dengan
+       foto background polos sesuai desain baru.
+       ════════════════════════════════════════ */
+    .hero-section {
       width: 100%;
-      min-height: 100%;
-      z-index: -1;
-      background-image:
+      max-width: 980px;
+      margin: 0 auto 20px;
+      border-radius: var(--radius);
+      background:
         linear-gradient(135deg,
-          rgba(10,50,18,0.72) 0%,
-          rgba(20,80,35,0.55) 50%,
-          rgba(8,35,15,0.78) 100%),
-        url('./assets/images/bg-hero.png');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
+          rgba(10,50,18,0.82) 0%,
+          rgba(20,80,35,0.65) 50%,
+          rgba(8,35,15,0.85) 100%),
+        var(--green-panel) url('./assets/images/bg-header.png') center/cover no-repeat;
+      padding: 56px 40px;
+      text-align: center;
+      color: var(--white);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.06);
+      animation: riseUp 0.7s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--badge-bg);
+      padding: 6px 24px 6px 6px;
+      border-radius: var(--radius-pill);
+      margin-bottom: 28px;
+    }
+    .hero-badge .badge-icon {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.18);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .hero-badge .badge-icon img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      padding: 4px;
+      display: block;
+    }
+    .hero-badge .badge-text {
+      color: var(--white);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.2px;
+    }
+
+    .hero-title {
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 800;
+      line-height: 1.3;
+      letter-spacing: -0.5px;
+      margin-bottom: 14px;
+    }
+    .hero-title .hero-highlight { color: var(--green-bright); }
+
+    .hero-sub {
+      font-size: 15px;
+      color: rgba(255,255,255,0.85);
+      max-width: 620px;
+      margin: 0 auto 32px;
+      line-height: 1.7;
+      font-weight: 400;
+    }
+
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--white); color: var(--green-main);
+      padding: 16px 32px; border-radius: var(--radius-pill);
+      font-size: 15px; font-weight: 700;
+      text-decoration: none; cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .hero-cta:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,0.25); }
+    .hero-cta .arrow { font-size: 16px; transition: transform 0.2s; }
+    .hero-cta:hover .arrow { transform: translateX(3px); }
+
+    @keyframes riseUp {
+      from { opacity: 0; transform: translateY(40px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     /* ── Card ── */
@@ -65,12 +142,7 @@
       overflow: hidden;
       box-shadow: 0 40px 100px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.08);
       animation: riseUp 0.7s cubic-bezier(0.22,1,0.36,1) both;
-      margin: auto 0;
-    }
-
-    @keyframes riseUp {
-      from { opacity: 0; transform: translateY(40px) scale(0.97); }
-      to   { opacity: 1; transform: translateY(0) scale(1); }
+      margin: 0 auto;
     }
 
     /* ── LEFT panel ── */
@@ -187,6 +259,7 @@
       display: flex;
       align-items: center;
       gap: 4px;
+      flex-wrap: wrap;
       font-size: 11px;
       letter-spacing: 1.8px; text-transform: uppercase;
       color: rgba(255,255,255,0.55); font-weight: 600; margin-bottom: 8px;
@@ -197,10 +270,19 @@
       font-size: 13px;
       line-height: 1;
     }
+    /* Catatan kecil di label, contoh: (Pilih satu) */
+    label .label-note {
+      text-transform: none;
+      letter-spacing: 0;
+      font-style: italic;
+      font-size: 10px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.4);
+    }
 
     .input-wrap { position: relative; }
 
-    input, textarea {
+    input, textarea, select {
       width: 100%; background: var(--input-bg); border: 2px solid transparent;
       border-radius: var(--radius-pill);
       padding: 14px 22px;
@@ -208,13 +290,29 @@
       outline: none; transition: box-shadow 0.2s, transform 0.15s, border-color 0.2s;
     }
     input::placeholder, textarea::placeholder { color: #a0b8a8; }
-    input:focus, textarea:focus {
+    input:focus, textarea:focus, select:focus {
       box-shadow: 0 0 0 3px rgba(61,204,102,0.45);
       transform: translateY(-1px);
     }
 
+    /* Dropdown kustom */
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      cursor: pointer;
+      padding-right: 44px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%231a6b2f' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 22px center;
+    }
+    select option[value=""][disabled] { color: #a0b8a8; }
+
+    /* Input "Lainnya" pada dropdown sumber leads */
+    .sumber-lainnya { margin-top: 10px; }
+
     /* State error */
-    input.error, textarea.error {
+    input.error, textarea.error, select.error {
       border-color: var(--error);
       box-shadow: 0 0 0 3px rgba(255,107,107,0.25);
       animation: shake 0.35s ease;
@@ -266,9 +364,38 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
+    /* ════════════════════════════════════════
+       SECTION SCORECARD & PETA (BARU)
+       ════════════════════════════════════════ */
+    .scorecard-section,
+    .map-section {
+      width: 100%;
+      max-width: 980px;
+      margin: 24px auto 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.06);
+      animation: riseUp 0.7s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    .scorecard-section { background: var(--white); }
+    .map-section { background: var(--green-panel); margin-bottom: 24px; }
+    .scorecard-section img,
+    .map-section img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
     /* ── Responsive ── */
     @media (max-width: 768px) {
-      body { padding: 10px; overflow-x: hidden; }
+      body { padding: 10px; overflow-x: hidden; gap: 0; }
+
+      .hero-section { padding: 36px 24px; border-radius: 20px; margin-bottom: 12px; }
+      .hero-badge { margin-bottom: 20px; }
+      .hero-title { font-size: 22px; }
+      .hero-sub { font-size: 13px; margin-bottom: 24px; }
+      .hero-cta { font-size: 13px; padding: 12px 24px; }
+
       .card { grid-template-columns: 1fr; border-radius: 20px; max-width: 100%; margin: 0; overflow: hidden; width: 100%; }
       .panel-left { min-height: auto; padding: 32px 24px; overflow: hidden; width: 100%; }
       .panel-right { padding: 32px 24px; }
@@ -278,11 +405,43 @@
       .left-cta         { font-size: 13px; padding: 12px 20px; }
       .form-heading     { font-size: 22px; }
       .hashtags         { margin-top: 16px; }
+
+      .scorecard-section, .map-section { border-radius: 20px; margin-top: 16px; }
+      .map-section { margin-bottom: 16px; }
     }
   </style>
 </head>
 <body>
-  <div id="bg"></div>
+
+  <!-- ════════════════════════════════════════
+       HERO / HEADER SECTION (BARU)
+       ════════════════════════════════════════ -->
+  <div class="hero-section">
+    <div class="hero-badge">
+      <span class="badge-icon">
+        <img src="./assets/images/logo-agros.png" alt="Logo Agros" />
+      </span>
+      <span class="badge-text">Agros</span>
+    </div>
+
+    <h1 class="hero-title">
+      Tingkatkan Produktivitas,<br/>
+      <span class="hero-highlight">Kurangi Biaya Operasional</span>
+    </h1>
+
+    <p class="hero-sub">
+      Solusi pompa air tenaga surya untuk kebutuhan irigasi pertanian lebih efisien sepanjang musim
+    </p>
+
+    <a class="hero-cta" href="#nama" onclick="scrollToForm(event)">
+      Konsultasikan Sekarang !
+      <span class="arrow">→</span>
+    </a>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       CARD: LEFT PANEL + FORM
+       ════════════════════════════════════════ -->
   <div class="card">
     <!-- LEFT -->
     <div class="panel-left">
@@ -297,7 +456,7 @@
       <div class="left-headline">
         <h1>Selamat Datang,<br/>di PT. Agros Global<br/>Indonesia</h1>
         <p>Perusahaan Pompa Irigasi Tenaga Surya yang melayani Pembelian ke Seluruh Indonesia</p>
-        <a class="left-cta" href="#">
+        <a class="left-cta" href="#nama" onclick="scrollToForm(event)">
           Silahkan Isi Data Bapak/Ibu
           <span class="arrow">→</span>
         </a>
@@ -338,6 +497,31 @@
         <div class="error-msg" id="err-kota">⚠ Asal kota wajib diisi.</div>
       </div>
 
+      <!-- DROPDOWN SUMBER LEADS (BARU) -->
+      <div class="field">
+        <label for="sumber">Bagaimana Anda Pertama Kali Mengetahui Agros? <span class="req">*</span> <span class="label-note">(Pilih satu)</span></label>
+        <div class="input-wrap">
+          <select id="sumber">
+            <option value="" disabled selected>Pilih salah satu</option>
+            <option value="TikTok">TikTok</option>
+            <option value="Instagram">Instagram</option>
+            <option value="Facebook">Facebook</option>
+            <option value="YouTube">YouTube</option>
+            <option value="Google Search">Google Search</option>
+            <option value="Website">Website</option>
+            <option value="Marketplace">Marketplace</option>
+            <option value="Teman / Kerabat">Teman / Kerabat</option>
+            <option value="Kelompok Tani / Komunitas">Kelompok Tani / Komunitas</option>
+            <option value="Agen / Sales Agros">Agen / Sales Agros</option>
+            <option value="Pameran / Event">Pameran / Event</option>
+            <option value="Pemerintah / Dinas">Pemerintah / Dinas</option>
+            <option value="Lainnya">Lainnya</option>
+          </select>
+        </div>
+        <input type="text" id="sumberLainnya" class="sumber-lainnya" placeholder="Sebutkan sumber lainnya..." style="display:none;" />
+        <div class="error-msg" id="err-sumber">⚠ Pertanyaan ini wajib dipilih.</div>
+      </div>
+
       <div class="field">
         <label for="pesan">Catatan/Pertanyaan <span class="req">*</span></label>
         <div class="input-wrap">
@@ -357,15 +541,23 @@
     </div>
   </div>
 
-  <script>
-    // Background height fix untuk mobile
-    function fixBg() {
-      const bg = document.getElementById('bg');
-      bg.style.height = document.documentElement.scrollHeight + 'px';
-    }
-    fixBg();
-    window.addEventListener('resize', fixBg);
+  <!-- ════════════════════════════════════════
+       SECTION SCORECARD STATS (BARU)
+       Ganti './assets/images/scorecard-stats.png'
+       ════════════════════════════════════════ -->
+  <div class="scorecard-section">
+    <img src="./assets/images/scorecard-stats.png" alt="Statistik Pencapaian Agrosolpump" />
+  </div>
 
+  <!-- ════════════════════════════════════════
+       SECTION PETA SEBARAN PRODUK (BARU)
+       Ganti './assets/images/map-indonesia.png'
+       ════════════════════════════════════════ -->
+  <div class="map-section">
+    <img src="./assets/images/map-indonesia.png" alt="Peta Sebaran Agrosolpump di Indonesia" />
+  </div>
+
+  <script>
     function previewLogo(event) {
       const file = event.target.files[0];
       if (!file) return;
@@ -379,6 +571,15 @@
       reader.readAsDataURL(file);
     }
 
+    // Scroll halus ke form ketika tombol "Konsultasikan Sekarang" diklik
+    function scrollToForm(event) {
+      event.preventDefault();
+      const target = document.getElementById('nama');
+      if (!target) return;
+      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => target.focus(), 400);
+    }
+
     // Hapus error state saat user mulai mengetik
     ['nama', 'telepon', 'kota', 'pesan'].forEach(id => {
       document.getElementById(id).addEventListener('input', function () {
@@ -387,7 +588,29 @@
       });
     });
 
-    function validateForm(nama, telepon, kota, pesan) {
+    // Dropdown sumber leads: tampilkan input teks bila "Lainnya" dipilih
+    const sumberSelectEl  = document.getElementById('sumber');
+    const sumberLainnyaEl = document.getElementById('sumberLainnya');
+
+    sumberSelectEl.addEventListener('change', function () {
+      if (this.value === 'Lainnya') {
+        sumberLainnyaEl.style.display = 'block';
+        sumberLainnyaEl.focus();
+      } else {
+        sumberLainnyaEl.style.display = 'none';
+        sumberLainnyaEl.value = '';
+        sumberLainnyaEl.classList.remove('error');
+      }
+      this.classList.remove('error');
+      document.getElementById('err-sumber').classList.remove('show');
+    });
+
+    sumberLainnyaEl.addEventListener('input', function () {
+      this.classList.remove('error');
+      document.getElementById('err-sumber').classList.remove('show');
+    });
+
+    function validateForm(nama, telepon, kota, sumber, sumberLainnya, pesan) {
       let valid = true;
 
       const fields = [
@@ -409,6 +632,24 @@
           err.classList.remove('show');
         }
       });
+
+      // Validasi dropdown "Sumber Leads"
+      const sumberErr = document.getElementById('err-sumber');
+      if (!sumber) {
+        sumberSelectEl.classList.add('error');
+        sumberErr.textContent = '⚠ Pertanyaan ini wajib dipilih.';
+        sumberErr.classList.add('show');
+        valid = false;
+      } else if (sumber === 'Lainnya' && !sumberLainnya) {
+        sumberLainnyaEl.classList.add('error');
+        sumberErr.textContent = '⚠ Mohon sebutkan sumber lainnya.';
+        sumberErr.classList.add('show');
+        valid = false;
+      } else {
+        sumberSelectEl.classList.remove('error');
+        sumberLainnyaEl.classList.remove('error');
+        sumberErr.classList.remove('show');
+      }
 
       return valid;
     }
@@ -442,10 +683,12 @@
       const teleponRaw = document.getElementById('telepon').value.trim();
       const telepon    = cleanPhone(teleponRaw);
       const kota       = document.getElementById('kota').value.trim();
+      const sumber     = sumberSelectEl.value;
+      const sumberLainnya = sumberLainnyaEl.value.trim();
       const pesan      = document.getElementById('pesan').value.trim();
 
       // Validasi field kosong
-      if (!validateForm(nama, teleponRaw, kota, pesan)) return;
+      if (!validateForm(nama, teleponRaw, kota, sumber, sumberLainnya, pesan)) return;
 
       // Validasi hasil cleaning nomor telepon
       if (telepon.startsWith("TIDAK VALID") || telepon.startsWith("CEK")) {
@@ -457,6 +700,11 @@
         return;
       }
 
+      // Gabungkan sumber leads, jika "Lainnya" sertakan teks isiannya
+      const sumberLeads = (sumber === 'Lainnya')
+        ? ('Lainnya: ' + sumberLainnya)
+        : sumber;
+
       const btn     = document.getElementById('submitBtn');
       const btnText = document.getElementById('btnText');
       btn.disabled  = true;
@@ -464,8 +712,9 @@
 
       const formData = new FormData();
       formData.append('nama',    nama);
-      formData.append('telepon', telepon);  // sudah bersih & terformat
-      formData.append('alamat',  kota);     // key 'alamat' sesuai Apps Script
+      formData.append('telepon', telepon);     // sudah bersih & terformat
+      formData.append('alamat',  kota);        // key 'alamat' sesuai Apps Script
+      formData.append('sumber',  sumberLeads); // -> kolom "Sumber Leads"
       formData.append('pesan',   pesan);
 
       try {
@@ -481,6 +730,10 @@
 
     function showSuccess() {
       ['nama','telepon','kota','pesan'].forEach(id => document.getElementById(id).value = '');
+      sumberSelectEl.value = '';
+      sumberLainnyaEl.value = '';
+      sumberLainnyaEl.style.display = 'none';
+
       const msg = document.getElementById('successMsg');
       msg.classList.add('show');
       setTimeout(() => msg.classList.remove('show'), 5000);
