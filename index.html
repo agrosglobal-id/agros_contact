@@ -45,56 +45,51 @@
     }
 
     /* ════════════════════════════════════════
+       MEGA CARD — pembungkus semua section
+       (hero, form, scorecard, peta) agar tampil
+       sebagai satu persegi panjang rounded.
+       ════════════════════════════════════════ */
+    .mega-card {
+      width: 100%;
+      max-width: 980px;
+      margin: 0 auto;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.08);
+      animation: riseUp 0.7s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    /* ════════════════════════════════════════
        HERO / HEADER SECTION (BARU)
        Ganti './assets/images/bg-header.png' dengan
        foto background polos sesuai desain baru.
+       (Tanpa overlay/shading — gambar tampil asli)
        ════════════════════════════════════════ */
     .hero-section {
       width: 100%;
-      max-width: 980px;
-      margin: 0 auto 20px;
-      border-radius: var(--radius);
-      background:
-        linear-gradient(135deg,
-          rgba(10,50,18,0.82) 0%,
-          rgba(20,80,35,0.65) 50%,
-          rgba(8,35,15,0.85) 100%),
-        var(--green-panel) url('./assets/images/bg-header.png') center/cover no-repeat;
+      background: var(--green-panel) url('./assets/images/bg-header.png') center/cover no-repeat;
       padding: 56px 40px;
       text-align: center;
       color: var(--white);
-      box-shadow: 0 30px 80px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.06);
-      animation: riseUp 0.7s cubic-bezier(0.22,1,0.36,1) both;
     }
 
     .hero-badge {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
       background: var(--badge-bg);
-      padding: 6px 24px 6px 6px;
+      padding: 10px 22px;
       border-radius: var(--radius-pill);
       margin-bottom: 28px;
     }
     .hero-badge .badge-icon {
-      width: 34px; height: 34px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.18);
-      display: flex; align-items: center; justify-content: center;
-      overflow: hidden;
-      flex-shrink: 0;
+      height: 26px;
+      display: flex; align-items: center;
     }
     .hero-badge .badge-icon img {
-      width: 100%; height: 100%;
+      height: 100%;
+      width: auto;
       object-fit: contain;
-      padding: 4px;
       display: block;
-    }
-    .hero-badge .badge-text {
-      color: var(--white);
-      font-weight: 700;
-      font-size: 16px;
-      letter-spacing: 0.2px;
     }
 
     .hero-title {
@@ -135,14 +130,8 @@
     /* ── Card ── */
     .card {
       width: 100%;
-      max-width: 980px;
       display: grid;
       grid-template-columns: 1fr 1.15fr;
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: 0 40px 100px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.08);
-      animation: riseUp 0.7s cubic-bezier(0.22,1,0.36,1) both;
-      margin: 0 auto;
     }
 
     /* ── LEFT panel ── */
@@ -370,15 +359,9 @@
     .scorecard-section,
     .map-section {
       width: 100%;
-      max-width: 980px;
-      margin: 24px auto 0;
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.06);
-      animation: riseUp 0.7s cubic-bezier(0.22,1,0.36,1) both;
     }
     .scorecard-section { background: var(--white); }
-    .map-section { background: var(--green-panel); margin-bottom: 24px; }
+    .map-section { background: var(--green-panel); }
     .scorecard-section img,
     .map-section img {
       width: 100%;
@@ -390,13 +373,15 @@
     @media (max-width: 768px) {
       body { padding: 10px; overflow-x: hidden; gap: 0; }
 
-      .hero-section { padding: 36px 24px; border-radius: 20px; margin-bottom: 12px; }
+      .mega-card { border-radius: 20px; max-width: 100%; width: 100%; }
+
+      .hero-section { padding: 36px 24px; }
       .hero-badge { margin-bottom: 20px; }
       .hero-title { font-size: 22px; }
       .hero-sub { font-size: 13px; margin-bottom: 24px; }
       .hero-cta { font-size: 13px; padding: 12px 24px; }
 
-      .card { grid-template-columns: 1fr; border-radius: 20px; max-width: 100%; margin: 0; overflow: hidden; width: 100%; }
+      .card { grid-template-columns: 1fr; }
       .panel-left { min-height: auto; padding: 32px 24px; overflow: hidden; width: 100%; }
       .panel-right { padding: 32px 24px; }
       .logo-img { height: 60px; max-width: 180px; }
@@ -405,13 +390,12 @@
       .left-cta         { font-size: 13px; padding: 12px 20px; }
       .form-heading     { font-size: 22px; }
       .hashtags         { margin-top: 16px; }
-
-      .scorecard-section, .map-section { border-radius: 20px; margin-top: 16px; }
-      .map-section { margin-bottom: 16px; }
     }
   </style>
 </head>
 <body>
+
+  <div class="mega-card">
 
   <!-- ════════════════════════════════════════
        HERO / HEADER SECTION (BARU)
@@ -421,7 +405,6 @@
       <span class="badge-icon">
         <img src="./assets/images/logo-agros.png" alt="Logo Agros" />
       </span>
-      <span class="badge-text">Agros</span>
     </div>
 
     <h1 class="hero-title">
@@ -556,6 +539,8 @@
   <div class="map-section">
     <img src="./assets/images/map-indonesia.png" alt="Peta Sebaran Agrosolpump di Indonesia" />
   </div>
+
+  </div><!-- /.mega-card -->
 
   <script>
     function previewLogo(event) {
