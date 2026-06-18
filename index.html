@@ -76,13 +76,10 @@
     .hero-badge {
       display: inline-flex;
       align-items: center;
-      background: var(--badge-bg);
-      padding: 8px 21px;
-      border-radius: var(--radius-pill);
       margin-bottom: 28px;
     }
     .hero-badge .badge-icon {
-      height: 21px;
+      height: 70px;
       display: flex; align-items: center;
     }
     .hero-badge .badge-icon img {
@@ -131,7 +128,7 @@
     .card {
       width: 100%;
       display: grid;
-      grid-template-columns: 1fr 1.15fr;
+      grid-template-columns: 1fr 1.3fr;
     }
 
     /* ── LEFT panel ── */
@@ -227,31 +224,31 @@
     /* ── RIGHT panel ── */
     .panel-right {
       background: var(--green-panel);
-      padding: 52px 48px;
+      padding: 44px 56px;
       display: flex; flex-direction: column; justify-content: center;
     }
     .form-heading {
-      font-size: clamp(22px, 2.5vw, 28px);
+      font-size: clamp(20px, 2.3vw, 26px);
       font-weight: 800; color: var(--white);
-      text-align: center; line-height: 1.2; margin-bottom: 6px;
+      text-align: center; line-height: 1.2; margin-bottom: 5px;
     }
     .form-sub {
-      font-size: 14px; color: var(--text-muted);
-      text-align: center; margin-bottom: 32px;
+      font-size: 13px; color: var(--text-muted);
+      text-align: center; margin-bottom: 22px;
     }
     .form-sub strong { color: var(--white); font-weight: 700; }
 
     /* ── Field & Validation ── */
-    .field { margin-bottom: 16px; }
+    .field { margin-bottom: 14px; }
 
     label {
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 5px;
       flex-wrap: wrap;
-      font-size: 11px;
-      letter-spacing: 1.8px; text-transform: uppercase;
-      color: rgba(255,255,255,0.55); font-weight: 600; margin-bottom: 8px;
+      font-size: 13px;
+      letter-spacing: 0.2px;
+      color: rgba(255,255,255,0.7); font-weight: 600; margin-bottom: 7px;
     }
     /* Tanda bintang wajib */
     label .req {
@@ -264,9 +261,9 @@
       text-transform: none;
       letter-spacing: 0;
       font-style: italic;
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 400;
-      color: rgba(255,255,255,0.4);
+      color: rgba(255,255,255,0.45);
     }
 
     .input-wrap { position: relative; }
@@ -274,8 +271,8 @@
     input, textarea, select {
       width: 100%; background: var(--input-bg); border: 2px solid transparent;
       border-radius: var(--radius-pill);
-      padding: 14px 22px;
-      font-family: 'Poppins', sans-serif; font-size: 14px; color: #1a3322;
+      padding: 14px 24px;
+      font-family: 'Poppins', sans-serif; font-size: 14.5px; color: #1a3322;
       outline: none; transition: box-shadow 0.2s, transform 0.15s, border-color 0.2s;
     }
     input::placeholder, textarea::placeholder { color: #a0b8a8; }
@@ -290,15 +287,15 @@
       -webkit-appearance: none;
       -moz-appearance: none;
       cursor: pointer;
-      padding-right: 44px;
+      padding-right: 46px;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%231a6b2f' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
-      background-position: right 22px center;
+      background-position: right 24px center;
     }
     select option[value=""][disabled] { color: #a0b8a8; }
 
     /* Input "Lainnya" pada dropdown sumber leads */
-    .sumber-lainnya { margin-top: 10px; }
+    .sumber-lainnya { margin-top: 8px; }
 
     /* State error */
     input.error, textarea.error, select.error {
@@ -316,20 +313,20 @@
       display: none;
       font-size: 11px;
       color: var(--error);
-      margin-top: 6px;
+      margin-top: 5px;
       padding-left: 4px;
       font-weight: 500;
     }
     .error-msg.show { display: block; }
 
-    textarea { border-radius: 20px; min-height: 100px; resize: vertical; }
+    textarea { border-radius: 20px; min-height: 80px; resize: vertical; }
 
     .btn-kirim {
-      width: 100%; padding: 16px;
+      width: 100%; padding: 14px;
       background: var(--green-bright); color: var(--green-panel);
       border: none; border-radius: var(--radius-pill);
       font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 800;
-      cursor: pointer; margin-top: 8px;
+      cursor: pointer; margin-top: 6px;
       transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
       box-shadow: 0 6px 24px rgba(61,204,102,0.35);
     }
@@ -338,7 +335,7 @@
     .btn-kirim:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
     .success-msg {
-      display: none; text-align: center; margin-top: 16px; padding: 16px;
+      display: none; text-align: center; margin-top: 14px; padding: 14px;
       background: rgba(61,204,102,0.15); border: 1px solid rgba(61,204,102,0.4);
       border-radius: var(--radius-sm); color: var(--white); font-size: 14px;
     }
@@ -377,19 +374,19 @@
 
       .hero-section { padding: 36px 24px; }
       .hero-badge { margin-bottom: 20px; }
-      .hero-badge .badge-icon { height: 15px; }
+      .hero-badge .badge-icon { height: 50px; }
       .hero-title { font-size: 22px; }
       .hero-sub { font-size: 13px; margin-bottom: 24px; }
       .hero-cta { font-size: 13px; padding: 12px 24px; }
 
       .card { grid-template-columns: 1fr; }
       .panel-left { min-height: auto; padding: 32px 24px; overflow: hidden; width: 100%; }
-      .panel-right { padding: 32px 24px; }
+      .panel-right { padding: 28px 24px; }
       .logo-img { height: 40px; max-width: 115px; }
       .left-headline h1 { font-size: 20px; }
       .left-headline p  { font-size: 13px; }
       .left-cta         { font-size: 13px; padding: 12px 20px; }
-      .form-heading     { font-size: 22px; }
+      .form-heading     { font-size: 20px; }
       .hashtags         { margin-top: 16px; }
     }
   </style>
@@ -479,6 +476,22 @@
           <input type="text" id="kota" placeholder="Contoh: Yogyakarta, DIY" />
         </div>
         <div class="error-msg" id="err-kota">⚠ Asal kota wajib diisi.</div>
+      </div>
+
+      <!-- DROPDOWN PERWAKILAN (BARU) -->
+      <div class="field">
+        <label for="perwakilan">Anda Mewakili <span class="req">*</span></label>
+        <div class="input-wrap">
+          <select id="perwakilan">
+            <option value="" disabled selected>Pilih salah satu</option>
+            <option value="Pemerintah">Pemerintah</option>
+            <option value="BUMDes">BUMDes</option>
+            <option value="Perusahaan / Badan Usaha">Perusahaan / Badan Usaha</option>
+            <option value="Kelompok Tani">Kelompok Tani</option>
+            <option value="Perorangan">Perorangan</option>
+          </select>
+        </div>
+        <div class="error-msg" id="err-perwakilan">⚠ Pertanyaan ini wajib dipilih.</div>
       </div>
 
       <!-- DROPDOWN SUMBER LEADS (BARU) -->
@@ -575,6 +588,13 @@
       });
     });
 
+    // Dropdown "Anda Mewakili": hapus error saat dipilih
+    const perwakilanSelectEl = document.getElementById('perwakilan');
+    perwakilanSelectEl.addEventListener('change', function () {
+      this.classList.remove('error');
+      document.getElementById('err-perwakilan').classList.remove('show');
+    });
+
     // Dropdown sumber leads: tampilkan input teks bila "Lainnya" dipilih
     const sumberSelectEl  = document.getElementById('sumber');
     const sumberLainnyaEl = document.getElementById('sumberLainnya');
@@ -597,7 +617,7 @@
       document.getElementById('err-sumber').classList.remove('show');
     });
 
-    function validateForm(nama, telepon, kota, sumber, sumberLainnya, pesan) {
+    function validateForm(nama, telepon, kota, perwakilan, sumber, sumberLainnya, pesan) {
       let valid = true;
 
       const fields = [
@@ -619,6 +639,17 @@
           err.classList.remove('show');
         }
       });
+
+      // Validasi dropdown "Anda Mewakili"
+      const perwakilanErr = document.getElementById('err-perwakilan');
+      if (!perwakilan) {
+        perwakilanSelectEl.classList.add('error');
+        perwakilanErr.classList.add('show');
+        valid = false;
+      } else {
+        perwakilanSelectEl.classList.remove('error');
+        perwakilanErr.classList.remove('show');
+      }
 
       // Validasi dropdown "Sumber Leads"
       const sumberErr = document.getElementById('err-sumber');
@@ -670,12 +701,13 @@
       const teleponRaw = document.getElementById('telepon').value.trim();
       const telepon    = cleanPhone(teleponRaw);
       const kota       = document.getElementById('kota').value.trim();
+      const perwakilan = perwakilanSelectEl.value;
       const sumber     = sumberSelectEl.value;
       const sumberLainnya = sumberLainnyaEl.value.trim();
       const pesan      = document.getElementById('pesan').value.trim();
 
       // Validasi field kosong
-      if (!validateForm(nama, teleponRaw, kota, sumber, sumberLainnya, pesan)) return;
+      if (!validateForm(nama, teleponRaw, kota, perwakilan, sumber, sumberLainnya, pesan)) return;
 
       // Validasi hasil cleaning nomor telepon
       if (telepon.startsWith("TIDAK VALID") || telepon.startsWith("CEK")) {
@@ -698,11 +730,12 @@
       btnText.innerHTML = `<span class="spinner"></span> Mengirim...`;
 
       const formData = new FormData();
-      formData.append('nama',    nama);
-      formData.append('telepon', telepon);     // sudah bersih & terformat
-      formData.append('alamat',  kota);        // key 'alamat' sesuai Apps Script
-      formData.append('sumber',  sumberLeads); // -> kolom "Sumber Leads"
-      formData.append('pesan',   pesan);
+      formData.append('nama',       nama);
+      formData.append('telepon',    telepon);     // sudah bersih & terformat
+      formData.append('alamat',     kota);        // key 'alamat' sesuai Apps Script
+      formData.append('perwakilan', perwakilan);  // -> kolom "Perwakilan"
+      formData.append('sumber',     sumberLeads); // -> kolom "Sumber Leads"
+      formData.append('pesan',      pesan);
 
       try {
         await fetch(APPS_SCRIPT_URL, { method: 'POST', body: formData });
@@ -717,6 +750,7 @@
 
     function showSuccess() {
       ['nama','telepon','kota','pesan'].forEach(id => document.getElementById(id).value = '');
+      perwakilanSelectEl.value = '';
       sumberSelectEl.value = '';
       sumberLainnyaEl.value = '';
       sumberLainnyaEl.style.display = 'none';
